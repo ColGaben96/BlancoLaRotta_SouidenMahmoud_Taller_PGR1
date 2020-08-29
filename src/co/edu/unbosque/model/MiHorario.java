@@ -67,6 +67,15 @@ public class MiHorario {
 
     }
 
+    public void createProfile(String name, String career, int semester, int status, int plan, boolean scholarship, double average) {
+        student = new Student(name, career, semester, status, plan, scholarship, average);
+        try {
+            properties.writeProperties(name, career, semester, status, plan, scholarship, average);
+        } catch (IOException e) {
+            System.out.println("Could not create file");
+        }
+    }
+
     public String viewAssignment(int assignmentCode) {
         return null;
     }
@@ -81,6 +90,17 @@ public class MiHorario {
             }
         }
         return code;
+    }
+
+    public boolean assignmentFound(String name) {
+        for (int i = 0; i < assignment.getAssignmentSize(); i++) {
+            var nameCheck = assignment.readAssignment(i).split("\n");
+            var assignment = nameCheck[0].split(": ");
+            if(assignment[1] == name) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public ScheduleProperties getProperties() {

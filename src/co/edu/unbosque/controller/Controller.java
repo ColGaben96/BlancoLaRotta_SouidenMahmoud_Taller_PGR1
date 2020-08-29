@@ -24,17 +24,16 @@ public class Controller implements ActionListener {
             profile = model.loadProfile();
         } catch (Exception e) {
             status = 1;
-            System.err.println("Algo paso"+e.getMessage());
         }
-        if(status == 0) {
-
-            goGUI();
-        }
-        else if(status == 1) {
+        if(profile.equals("")){
             newProfile();
+        } else {
+            goGUI();
         }
     }
     public void newProfile() {
+        gui.getProfile().setVisible(true);
+        //gui.setVisible(false);
 
     }
     public void goGUI() {
@@ -49,20 +48,20 @@ public class Controller implements ActionListener {
             for (int j = 0; j < 7; j++) {
                 //TODO: Bring information from model
                 if(e.getActionCommand().equals(gui.getSchedule().HORARIO[i][j])) {
+                    if(model.assignmentFound(gui.getSchedule().getSchedule()[i][j].getText())) {
+                        var assignmentCode = model.searchAssignmentCode(gui.getSchedule().getSchedule()[i][j].getText());
+                    }
                     gui.getCrud().restoreDefaultData();
                     gui.getCrud().setVisible(true);
                     gui.getCrud().getHour().setSelectedIndex(i);
                     gui.getCrud().getDayCbox()[j-1].setSelected(true);
                     /*Validation if user changes text from confirmed assignment*/
                     try {
-                        var assignmentDetails = model.viewAssignment(model.searchAssignmentCode(gui.getSchedule().getSchedule()[i][j].getText())).split("\n");
-
                         if(model.viewAssignment(model.searchAssignmentCode(gui.getSchedule().getSchedule()[i][j].getText())) != gui.getCrud().getAssignmentName().getText()) {
 
                         }
-                        //  update the assignment
                     } catch (NullPointerException npe) {
-                        System.out.println("No assignments were added");
+
                     }
                     if(gui.getSchedule().getSchedule()[i][j].getText().contains(":")) {
                         try {
@@ -127,6 +126,26 @@ public class Controller implements ActionListener {
         if(e.getActionCommand().equals(gui.getCrud().CANCEL)) {
             gui.getCrud().setVisible(false);
             gui.getCrud().restoreDefaultData();
+        }
+        /*gui.getProfile()*/
+        if(e.getActionCommand().equals(gui.getProfile().FINISHOOBE)) {
+            if(gui.getProfile().getComboScholarship().getSelectedIndex() == 0) {
+                model.createProfile(gui.getProfile().getTxName().getText(),
+                        gui.getProfile().getTxCareer().getText(),
+                        Integer.parseInt(gui.getProfile().getTxSemester().getText()),
+                        gui.getProfile().getComboStatus().getSelectedIndex(),
+                        gui.getProfile().getComboPlan().getSelectedIndex(),
+                        true,
+                        Double.parseDouble(gui.getProfile().getTxAverage().getText()));
+            } else {
+                model.createProfile(gui.getProfile().getTxName().getText(),
+                        gui.getProfile().getTxCareer().getText(),
+                        Integer.parseInt(gui.getProfile().getTxSemester().getText()),
+                        gui.getProfile().getComboStatus().getSelectedIndex(),
+                        gui.getProfile().getComboPlan().getSelectedIndex(),
+                        false,
+                        Double.parseDouble(gui.getProfile().getTxAverage().getText()));
+            }
         }
     }
 }

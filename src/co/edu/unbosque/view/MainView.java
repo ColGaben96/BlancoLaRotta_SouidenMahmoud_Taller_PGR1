@@ -3,6 +3,8 @@ import co.edu.unbosque.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * This is the principal and only one <b>Frame</b>. According to UEB's architecture, this is the communication with Controller.
@@ -15,6 +17,7 @@ public class MainView extends JFrame {
 	private SchedulePanel schedule = new SchedulePanel();
 	private PresentationPicture pic = new PresentationPicture();
 	private CRUDAssignmentDialog crud = new CRUDAssignmentDialog();
+	private ProfileFrame profile = new ProfileFrame();
 	
 	/**
 	 * This is the method where initializes the whole view package. Won't do it in a constructor method because calling it from Controller will have trouble to load it later. <br>
@@ -67,6 +70,8 @@ public class MainView extends JFrame {
 		crud.getColorPicker().addActionListener(controller);
 		crud.getGradesPanel().getAddPeriod().addActionListener(controller);
 		crud.getGradesPanel().getDeletePeriod().addActionListener(controller);
+		/* ProfileFrame */
+		profile.getFinishOOBE().addActionListener(controller);
 	}
 
 	private void TableNImgPresentation() {
@@ -102,5 +107,9 @@ public class MainView extends JFrame {
 
 	public CRUDAssignmentDialog getCrud() {
 		return crud;
+	}
+
+	public ProfileFrame getProfile() {
+		return profile;
 	}
 }
