@@ -20,7 +20,7 @@ public class MiHorario {
         String json = "";
         try {
             json = binaries.read();
-            var separatedJson = json.split("-");
+            var separatedJson = json.split("\\$");
             assignment.restoreArray(separatedJson[0]);
         } catch (ArrayIndexOutOfBoundsException | IOException out) {
             try {

@@ -16,6 +16,7 @@ public class Controller implements ActionListener {
     private MainView gui = new MainView();
     private MiHorario model = new MiHorario();
     public void start() {
+        gui.start(this);
         int status = 0;
         String data = "";
         String profile = "";
@@ -33,11 +34,11 @@ public class Controller implements ActionListener {
     }
     public void newProfile() {
         gui.getProfile().setVisible(true);
-        //gui.setVisible(false);
+        gui.setVisible(false);
 
     }
     public void goGUI() {
-    gui.start(this);
+    gui.setVisible(true);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class Controller implements ActionListener {
         //TODO: Change the iterators values from fixed to whatever is in view.
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
-                //TODO: Bring information from model
+                
                 if(e.getActionCommand().equals(gui.getSchedule().HORARIO[i][j])) {
                     if(model.assignmentFound(gui.getSchedule().getSchedule()[i][j].getText())) {
                         var assignmentCode = model.searchAssignmentCode(gui.getSchedule().getSchedule()[i][j].getText());
@@ -146,6 +147,8 @@ public class Controller implements ActionListener {
                         false,
                         Double.parseDouble(gui.getProfile().getTxAverage().getText()));
             }
+            gui.getProfile().setVisible(false);
+            gui.setVisible(true);
         }
     }
 }

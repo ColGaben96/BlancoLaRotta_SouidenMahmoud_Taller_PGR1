@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * This panel's purpose is only to paint and do all the CRUD actions on data.
@@ -44,6 +45,35 @@ public class SchedulePanel extends JPanel {
                 schedule[i][j].setSelectedTextColor(new Color(255,255,255));
                 HORARIO[i][j] = i + "," + j;
                 schedule[i][j].setActionCommand(HORARIO[i][j]);
+                int finalI1 = i;
+                int finalJ1 = j;
+                MouseListener mouseListener = new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        onSecondClick(finalI1, finalJ1,e);
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                };
+                schedule[i][j].addMouseListener(mouseListener);
             }
         }
         setLayout(new GridLayout(hours.length+1, days.length));
@@ -128,20 +158,13 @@ public class SchedulePanel extends JPanel {
      * <i><b>Post</b>condition</i>:
      * @author Gabriel Blanco
      */
-    public void onSecondClick(int hour, int day) {
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                popupMenu.show(null, e.getX(), e.getY());
-                if((schedule[hour][day].getText().equals("") || schedule[hour][day].getText().equals(null)) && schedule[hour][day].getBackground() == new Color(255,255,255) ) {
-                    popupMenu.add(newAssignment);
-                }
-                if(!(schedule[hour][day].getText().equals("") || schedule[hour][day].getText().equals(null))) {
-                    popupMenu.add(updateAssignment);
-                    popupMenu.add(deleteAssignment);
-                }
-            }
-        });
+    public void onSecondClick(int hour, int day, MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu.add(newAssignment);
+            popupMenu.add(updateAssignment);
+            popupMenu.add(deleteAssignment);
+            popupMenu.show(this,schedule[hour][day].getX(),schedule[hour][day].getY());
+        }
     }
 
     public JTextField[][] getSchedule() {

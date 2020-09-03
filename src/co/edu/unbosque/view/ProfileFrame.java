@@ -3,7 +3,6 @@ package co.edu.unbosque.view;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class ProfileFrame extends JFrame {
@@ -34,7 +33,7 @@ public class ProfileFrame extends JFrame {
     DefaultComboBoxModel commonModel = new DefaultComboBoxModel(arrStatusCommon),
         schoolModel = new DefaultComboBoxModel(arrStatusSchool);
     private JButton finishOOBE = new JButton("Acepto los términos y condiciones y comenzar a usar el programa");
-    public final String FINISHOOBE = "FINISHEDOOBECREATENOW",SCHOLARSHIP = "NEWSCHOLARSHIP";
+    public final String FINISHOOBE = "FINISHEDOOBECREATENOW";
 
 
     public ProfileFrame() {
@@ -54,7 +53,6 @@ public class ProfileFrame extends JFrame {
         setupPanels();
         finishOOBE.setActionCommand(FINISHOOBE);
         comboScholarship.setSelectedIndex(1);
-        comboScholarship.setActionCommand(SCHOLARSHIP);
         ItemListener itemListener = e -> {
             if(comboScholarship.getSelectedIndex() == 0) {
                 comboPlan.setSelectedIndex(0);
@@ -144,13 +142,5 @@ public class ProfileFrame extends JFrame {
 
     public JTextField getTxCareer() {
         return txCareer;
-    }
-
-    public String[] getArrStatusCommon() {
-        return arrStatusCommon;
-    }
-
-    public String[] getArrStatusSchool() {
-        return arrStatusSchool;
     }
 }
