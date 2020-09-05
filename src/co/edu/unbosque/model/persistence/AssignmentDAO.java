@@ -15,23 +15,24 @@ public class AssignmentDAO {
     }
     public String readAssignment(int asgnCode) {
         String myAssignment = "";
-        myAssignment += "Name: "+assignment.get(asgnCode).getName()+",\n";
-        myAssignment += "Teacher: "+assignment.get(asgnCode).getTeacher()+",\n";
-        myAssignment += "Credits: "+assignment.get(asgnCode).getCredits()+",\n";
-        myAssignment += "Periods: "+assignment.get(asgnCode).getPeriods()+",\n";
+        myAssignment += assignment.get(asgnCode).getName()+",";
+        myAssignment += assignment.get(asgnCode).getTeacher()+",";
+        myAssignment += +assignment.get(asgnCode).getCredits()+",";
+        myAssignment += assignment.get(asgnCode).getPeriods()+",";
         String gradesStr = "";
         for (int i = 0; i < assignment.get(asgnCode).getGrades().length; i++) {
             gradesStr += assignment.get(asgnCode).getGrades()[i]+"; ";
         }
-        myAssignment += "Grades: "+gradesStr+",\n";
-        myAssignment += "Hour: "+assignment.get(asgnCode).getHour()+"\n";
+        myAssignment += gradesStr+",";
+        myAssignment += assignment.get(asgnCode).getHour()+",";
         String daysStr = "";
         for (int i = 0; i < assignment.get(asgnCode).getDays().length; i++) {
             daysStr += assignment.get(asgnCode).getDays()[i]+"; ";
         }
-        myAssignment += "Days: "+daysStr+",\n";
-        myAssignment += "Obligatory: "+assignment.get(asgnCode).isObligatory()+",\n";
-        myAssignment += "Color: "+assignment.get(asgnCode).getColor()+",\n";
+        myAssignment += daysStr+",";
+        myAssignment += assignment.get(asgnCode).isObligatory()+",";
+        myAssignment += assignment.get(asgnCode).getColor()+",";
+        myAssignment += "\n";
         return myAssignment;
     }
     public void updateAssignment(int asgnCode, String name, String teacher, int credits, int periods, double[] grades, int hour, int[] days, boolean obligatory, Color color) {
@@ -79,7 +80,7 @@ public class AssignmentDAO {
     }
 
     public void restoreArray(String separatedJson) {
-        var theAssignments = separatedJson.split("\\$");
+        var theAssignments = separatedJson.split(",");
         for (int i = 0; i < theAssignments.length-1; i++) {
             var restoredArray = theAssignments[i].split(",");
             String name = restoredArray[1];

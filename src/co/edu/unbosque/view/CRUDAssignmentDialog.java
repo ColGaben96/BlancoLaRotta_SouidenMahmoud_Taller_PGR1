@@ -55,7 +55,7 @@ public class CRUDAssignmentDialog extends JDialog {
         for (int i = 0; i < dayCbox.length; i++) {
             dayCbox[i].setBackground(new Color(255,255,255));
         }
-        setSize(650,600);
+        setSize(650,700);
         setTitle("Asignatura");
         initialDataConfig();
         daysChecksConfig();

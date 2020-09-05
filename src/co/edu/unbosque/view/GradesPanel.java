@@ -49,8 +49,16 @@ public class GradesPanel extends JPanel {
         setBackground(new Color(255,255,255));
         addPeriod();
         deletePeriod.setEnabled(false);
+        intialSetup();
     }
 
+    private void intialSetup() {
+        model.addRow(new Object[]{counter,"0.0","30"});
+        counter++;
+        deletePeriod.setEnabled(true);
+        model.addRow(new Object[]{counter,"0.0","40"});
+        counter++;
+    }
     private void setupTablePanel() {
         tablePanel.setLayout(new BorderLayout());
         tablePanel.add(scroll, BorderLayout.CENTER);
@@ -73,7 +81,7 @@ public class GradesPanel extends JPanel {
     }
 
     public void addPeriod() {
-        model.addRow(new Object[]{counter,"",""});
+        model.addRow(new Object[]{counter,"0.0","30"});
         counter++;
         deletePeriod.setEnabled(true);
     }
@@ -84,6 +92,10 @@ public class GradesPanel extends JPanel {
         if(counter < 3) {
             deletePeriod.setEnabled(false);
         }
+    }
+
+    public void updatePeriod(int period, double grade) {
+        table.setValueAt(grade,period,1);
     }
 
     public int getPeriodCount() {

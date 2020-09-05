@@ -179,5 +179,16 @@ public class SchedulePanel extends JPanel {
         return hours;
     }
 
+    public JMenuItem getNewAssignment() {
+        return newAssignment;
+    }
+
+    public JMenuItem getDeleteAssignment() {
+        return deleteAssignment;
+    }
+
+    public JMenuItem getUpdateAssignment() {
+        return updateAssignment;
+    }
 }
 

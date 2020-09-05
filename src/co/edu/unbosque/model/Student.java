@@ -5,6 +5,8 @@ public class Student {
     private int semester, status, plan;
     private boolean scholarship;
     private double average;
+    private double matricula;
+    public final double VALOR_MATRICULA = 6414.00;
 
     public Student(String name, String career, int semester, int status, int plan, boolean scholarship, double average) {
         this.name = name;
@@ -14,6 +16,7 @@ public class Student {
         this.plan = plan;
         this.scholarship = scholarship;
         this.average = average;
+        matricula = VALOR_MATRICULA;
     }
 
     public String getName() {
@@ -71,4 +74,12 @@ public class Student {
     public void setAverage(double average) {
         this.average = average;
     }
+
+	public double getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(double matricula) {
+		this.matricula = matricula;
+	}
 }

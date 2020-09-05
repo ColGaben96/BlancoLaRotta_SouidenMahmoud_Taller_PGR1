@@ -3,15 +3,18 @@ package co.edu.unbosque.model.persistence;
 import java.io.*;
 
 public class Binaries implements Serializable {
-    public void write(Object[] assignments) throws IOException {
+	
+	private static final long serialVersionUID = 1L;
+
+	public void write(Object[] assignments) throws IOException {
         String cAssignments = "";
         for (int i = 0; i < assignments.length; i++) {
             cAssignments += assignments[i]+"$\n";
         }
         File f = new File("./MiHorario.bin");
-        FileOutputStream fos = new FileOutputStream(f);
+        FileOutputStream fos = new FileOutputStream(f, true);
         DataOutputStream dos = new DataOutputStream(fos);
-        String json = "Assignments [,"+cAssignments+"]";
+        String json = ","+cAssignments;
         byte[] data = json.getBytes();
         for (int i = 0; i < data.length; i++) {
             dos.writeInt(data[i]+30);

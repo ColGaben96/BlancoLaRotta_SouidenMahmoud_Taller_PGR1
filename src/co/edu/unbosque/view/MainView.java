@@ -18,6 +18,7 @@ public class MainView extends JFrame {
 	private PresentationPicture pic = new PresentationPicture();
 	private CRUDAssignmentDialog crud = new CRUDAssignmentDialog();
 	private ProfileFrame profile = new ProfileFrame();
+	private Alerts alerts = new Alerts();
 	
 	/**
 	 * This is the method where initializes the whole view package. Won't do it in a constructor method because calling it from Controller will have trouble to load it later. <br>
@@ -63,6 +64,9 @@ public class MainView extends JFrame {
 				schedule.getSchedule()[i][j].addActionListener(controller);
 			}
 		}
+		schedule.getNewAssignment().addActionListener(controller);
+		schedule.getDeleteAssignment().addActionListener(controller);
+		schedule.getUpdateAssignment().addActionListener(controller);
 		/* CRUD */
 		crud.getOk().addActionListener(controller);
 		crud.getCancel().addActionListener(controller);
@@ -111,5 +115,9 @@ public class MainView extends JFrame {
 
 	public ProfileFrame getProfile() {
 		return profile;
+	}
+
+	public Alerts getAlerts() {
+		return alerts;
 	}
 }
